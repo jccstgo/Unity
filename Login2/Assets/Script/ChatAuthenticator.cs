@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
     Documentation: https://mirror-networking.gitbook.io/docs/components/network-authenticators
@@ -84,6 +85,7 @@ namespace Mirror.Examples.Chat
             // check the credentials by calling your web server, database table, playfab api, or any method appropriate.
             if (!Player.playerNames.Contains(msg.authUsername) && msg.authPassword=="123")
             {
+
                 // Add the name to the HashSet
                 Player.playerNames.Add(msg.authUsername);
 
@@ -103,6 +105,7 @@ namespace Mirror.Examples.Chat
 
                 // Accept the successful authentication
                 ServerAccept(conn);
+
             }
             else
             {
@@ -198,7 +201,14 @@ namespace Mirror.Examples.Chat
             if (msg.code == 100)
             {
                 Debug.Log($"Authentication Response: {msg.message}");
-
+                if (playerName == "A")
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: 1);
+                }
+                else if (playerName == "B")
+                {
+                    SceneManager.LoadScene(sceneBuildIndex: 2);
+                }
                 // Authentication has been accepted
                 ClientAccept();
             }
